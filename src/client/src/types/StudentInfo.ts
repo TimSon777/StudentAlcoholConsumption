@@ -22,4 +22,22 @@ export type StudentInfo = {
   absences: number | "";
 };
 
+export const DefaultStudentInfo: StudentInfo = {
+  sex: "",
+  age: "",
+  address: "",
+  absences: "",
+  activities: "",
+  failures: "",
+  famrel: "",
+  famsup: "",
+  freetime: "",
+  goout: "",
+  health: "",
+  Pstatus: "",
+  romantic: "",
+  studytime: "",
+  traveltime: "",
+};
+
 // sex, age, address, Pstatus, traveltime, studytime, failures, famsup, paid, activities, romantic, famrel, freetime, goout, health, absences

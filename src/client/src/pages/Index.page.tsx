@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -14,7 +14,7 @@ import {
 import { Sex } from "../types/Sex";
 import enumKeys from "../utils/enumArray";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { StudentInfo } from "../types/StudentInfo";
+import { DefaultStudentInfo, StudentInfo } from "../types/StudentInfo";
 import { AddressType } from "../types/AddressType";
 import { CohabitationStatus } from "../types/CohabitationStatus";
 import { Binary } from "../types/Binary";
@@ -23,45 +23,41 @@ import Server from "../services/Server";
 import { useNotifier } from "../hooks/notifier";
 import { useNavigate } from "react-router-dom";
 import { PredictionContext } from "../contexts/prediction.context";
+import { useStorage } from "../hooks/useStorage";
 
 export const IndexPage = () => {
   const { setPrediction } = useContext(PredictionContext);
+  const { form, setForm, loading } = useStorage();
   const navigate = useNavigate();
   const { showError, showSuccess } = useNotifier();
   const {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm<StudentInfo>({
-    defaultValues: {
-      sex: "",
-      age: "",
-      address: "",
-      absences: "",
-      activities: "",
-      failures: "",
-      famrel: "",
-      famsup: "",
-      freetime: "",
-      goout: "",
-      health: "",
-      Pstatus: "",
-      romantic: "",
-      studytime: "",
-      traveltime: "",
-    },
+    defaultValues: DefaultStudentInfo,
   });
+
+  useEffect(() => {
+    reset(form);
+  }, [reset, form]);
 
   const submit: SubmitHandler<StudentInfo> = async (data) => {
     try {
       const prediction = await Server.getPrediction(data);
       setPrediction(prediction);
+      setForm(data);
       showSuccess("Successfully predicted");
       navigate("/result");
     } catch (e) {
       showError(e);
     }
   };
+
+  if (loading) {
+    return <></>;
+  }
 
   return (
     <Grid container spacing={2} justifyContent={"center"}>
