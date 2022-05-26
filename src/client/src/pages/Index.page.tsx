@@ -43,7 +43,6 @@ export const IndexPage = () => {
       freetime: "",
       goout: "",
       health: "",
-      paid: "",
       Pstatus: "",
       romantic: "",
       studytime: "",
@@ -273,31 +272,6 @@ export const IndexPage = () => {
                   ))}
                 </Select>
                 <FormHelperText>{errors.famsup?.message}</FormHelperText>
-              </FormControl>
-            )}
-          />
-
-          <Controller
-            name="paid"
-            control={control}
-            rules={{
-              required: { value: true, message: "Required" },
-            }}
-            render={({ field }) => (
-              <FormControl fullWidth error={!!errors.paid}>
-                <InputLabel>Extra paid classes</InputLabel>
-                <Select
-                  value={field.value}
-                  label="Extra paid classes"
-                  onChange={field.onChange}
-                >
-                  {enumKeys(Binary).map((key) => (
-                    <MenuItem value={Binary[key]} key={key}>
-                      {key}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{errors.paid?.message}</FormHelperText>
               </FormControl>
             )}
           />

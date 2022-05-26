@@ -13,7 +13,6 @@ export type StudentInfo = {
   studytime: number | "";
   failures: number | "";
   famsup: Binary | "";
-  paid: Binary | "";
   activities: Binary | "";
   romantic: Binary | "";
   famrel: number | "";
