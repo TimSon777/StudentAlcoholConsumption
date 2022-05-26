@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   FormControl,
@@ -21,14 +21,16 @@ import { Binary } from "../types/Binary";
 import { parseIntOrEmpty } from "../utils/parseIntOrEmpty";
 import Server from "../services/Server";
 import { useNotifier } from "../hooks/notifier";
+import { useNavigate } from "react-router-dom";
+import { PredictionContext } from "../contexts/prediction.context";
 
 export const IndexPage = () => {
-  const { showError } = useNotifier();
+  const { setPrediction } = useContext(PredictionContext);
+  const navigate = useNavigate();
+  const { showError, showSuccess } = useNotifier();
   const {
     handleSubmit,
-    watch,
     formState: { errors },
-    reset,
     control,
   } = useForm<StudentInfo>({
     defaultValues: {
@@ -53,7 +55,9 @@ export const IndexPage = () => {
   const submit: SubmitHandler<StudentInfo> = async (data) => {
     try {
       const prediction = await Server.getPrediction(data);
-      console.log(prediction);
+      setPrediction(prediction);
+      showSuccess("Successfully predicted");
+      navigate("/result");
     } catch (e) {
       showError(e);
     }
@@ -241,6 +245,7 @@ export const IndexPage = () => {
                   label="Failures"
                   onChange={field.onChange}
                 >
+                  <MenuItem value={0}>{"0 times"}</MenuItem>
                   <MenuItem value={1}>{"1 time"}</MenuItem>
                   <MenuItem value={2}>{"2 times"}</MenuItem>
                   <MenuItem value={3}>{"3 times"}</MenuItem>

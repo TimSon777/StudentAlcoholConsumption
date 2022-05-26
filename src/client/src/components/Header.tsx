@@ -1,13 +1,16 @@
-import React from "react";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import { AppBar, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { PredictionContext } from "../contexts/prediction.context";
 
 export const Header = () => {
+  const { prediction } = useContext(PredictionContext);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Box sx={{ display: "inline-block" }}>
+          <Stack spacing={3} direction={"row"}>
             <Typography
               component={Link}
               to={"/"}
@@ -24,7 +27,16 @@ export const Header = () => {
             >
               Student alcohol consumptions
             </Typography>
-          </Box>
+
+            <Button variant="text" component={Link} to={"/"}>
+              Survey
+            </Button>
+            {!!prediction && (
+              <Button variant="text" component={Link} to={"/result"}>
+                Result
+              </Button>
+            )}
+          </Stack>
         </Toolbar>
       </AppBar>
     </Box>
