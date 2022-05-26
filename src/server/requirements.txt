@@ -1,0 +1,8 @@
+Django==4.0.4
+keras==2.9.0
+matplotlib==3.5.2
+numpy==1.22.4
+pandas==1.4.2
+scikit_learn==1.1.1
+tensorflow==2.9.1
+django-cors-headers==3.10.1

@@ -11,7 +11,9 @@ class Neuronus:
     @staticmethod
     def initModel():
         if not os.path.exists("weight"):
+            print("\nTraining model...\n")
             train_model()
+        print("\nLoading model...\n")
         Neuronus.model = load_model("weight", compile=False)
 
 
