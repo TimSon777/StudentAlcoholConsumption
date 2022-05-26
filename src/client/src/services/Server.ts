@@ -2,7 +2,7 @@ import { StudentInfo } from "../types/StudentInfo";
 import axios from "../utils/axios";
 import { Prediction } from "../types/Prediction";
 
-const map = (data: any) => new Prediction(data.Dalc, data.Walc);
+const map = (data: any) => new Prediction(data.dalc, data.dalc);
 
 const Server = {
   getPrediction: async (info: StudentInfo): Promise<Prediction> => {
