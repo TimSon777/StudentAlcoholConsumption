@@ -3,7 +3,7 @@
 import os
 import sys
 
-#from web.models import Neuronus
+from web.models import Neuronus
 
 
 def main():
@@ -21,5 +21,5 @@ def main():
 
 
 if __name__ == '__main__':
+    Neuronus.learn()
     main()
-    #Neuronus.learn()
