@@ -427,33 +427,6 @@ export const IndexPage = () => {
             )}
           />
 
-          <Controller
-            name={"absences"}
-            control={control}
-            rules={{
-              required: { value: true, message: "Required" },
-              min: { value: 0, message: "Min - 0" },
-              max: { value: 93, message: "Max - 93" },
-            }}
-            render={({ field }) => (
-              <TextField
-                error={!!errors.absences && !!errors.absences.message}
-                helperText={errors.absences?.message}
-                label="Number of absences"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                fullWidth
-                type={"number"}
-                value={field.value}
-                onChange={(e) =>
-                  field.onChange(parseIntOrEmpty(e.target.value))
-                }
-              />
-            )}
-          />
-
           <Button type={"submit"}>Submit</Button>
         </Stack>
       </Grid>

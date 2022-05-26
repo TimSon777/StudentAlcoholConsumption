@@ -19,14 +19,12 @@ export type StudentInfo = {
   freetime: number | "";
   goout: number | "";
   health: number | "";
-  absences: number | "";
 };
 
 export const DefaultStudentInfo: StudentInfo = {
   sex: "",
   age: "",
   address: "",
-  absences: "",
   activities: "",
   failures: "",
   famrel: "",
